@@ -1,0 +1,30 @@
+# Node / NPM
+node_modules
+npm-debug.log
+yarn.lock
+.pnpm-store
+
+# Logs
+*.log
+logs
+*.pid
+*.seed
+*.pid.lock
+
+# Build outputs
+dist
+tmp
+.out
+coverage
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Env files
+.env
+.env.*
+!.env.example
+
+# Docker
+pgdata
