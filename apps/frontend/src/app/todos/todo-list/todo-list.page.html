@@ -1,0 +1,84 @@
+<div class="card">
+  <h2>Todos</h2>
+
+  <form class="form-row" (ngSubmit)="create()">
+    <input
+      class="input"
+      [(ngModel)]="title"
+      name="title"
+      placeholder="Title"
+      required />
+
+    <input
+      class="input"
+      [(ngModel)]="description"
+      name="description"
+      placeholder="Description (optional)" />
+
+    <button class="btn" type="submit">Add</button>
+  </form>
+
+  @if (store.loading$ | async) {
+    <div class="muted mt-12">Loading…</div>
+  }
+
+  <section class="section">
+    <div class="section-header">
+      <h3>Pending</h3>
+      <span class="badge">{{ store.pendingCount$ | async }}</span>
+    </div>
+
+    @if ((store.pending$ | async); as pending) {
+      @if (pending.length === 0) {
+        <div class="muted">No pending todos.</div>
+      } @else {
+        <ul class="list">
+          @for (t of pending; track t.id) {
+            <li class="list-item">
+              <input
+                type="checkbox"
+                [checked]="t.completed"
+                (change)="toggle(t.id)" />
+
+              <div class="todo-title">{{ t.title }}</div>
+
+              <a class="btn btn-muted" [routerLink]="['/todos', t.id]">Edit</a>
+              <button class="btn btn-danger" (click)="remove(t.id)">Delete</button>
+            </li>
+          }
+        </ul>
+      }
+    }
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section">
+    <div class="section-header">
+      <h3>Completed</h3>
+      <span class="badge badge-success">{{ store.completedCount$ | async }}</span>
+    </div>
+
+    @if ((store.completed$ | async); as completed) {
+      @if (completed.length === 0) {
+        <div class="muted">No completed todos yet.</div>
+      } @else {
+        <ul class="list">
+          @for (t of completed; track t.id) {
+            <li class="list-item list-item-completed">
+              <input
+                type="checkbox"
+                [checked]="t.completed"
+                (change)="toggle(t.id)" />
+
+              <div class="todo-title completed">{{ t.title }}</div>
+
+              <a class="btn btn-muted" [routerLink]="['/todos', t.id]">Edit</a>
+              <button class="btn btn-danger" (click)="remove(t.id)">Delete</button>
+            </li>
+          }
+        </ul>
+      }
+    }
+  </section>
+</div>

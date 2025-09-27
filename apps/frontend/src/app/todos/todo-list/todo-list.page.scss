@@ -1,0 +1,41 @@
+.mt-12 { margin-top: 12px; }
+.muted { color: var(--muted); }
+
+.section { margin-top: 18px; }
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.section-header h3 { margin: 0; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: #1f2937;
+  border: 1px solid var(--border);
+  color: var(--fg);
+  font-size: 12px;
+  font-weight: 700;
+}
+.badge-success {
+  background: rgba(16,185,129,.15);
+  border-color: rgba(16,185,129,.35);
+  color: #34d399;
+}
+
+.divider {
+  height: 1px;
+  margin: 18px 0;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  border-radius: 1px;
+}
+
+.list-item-completed {
+  background: #0b1222;
+  opacity: .9;
+}

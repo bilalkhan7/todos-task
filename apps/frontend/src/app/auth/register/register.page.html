@@ -1,0 +1,44 @@
+<div class="card">
+  <h2>Create your account</h2>
+
+  <form class="stack" (ngSubmit)="submit()">
+    <input
+      class="input"
+      name="name"
+      [(ngModel)]="name"
+      required
+      placeholder="Your name" />
+
+    <input
+      class="input"
+      name="email"
+      [(ngModel)]="email"
+      type="email"
+      required
+      placeholder="Email" />
+
+    <input
+      class="input"
+      name="password"
+      [(ngModel)]="password"
+      type="password"
+      required
+      placeholder="Password (min 8)" />
+
+    <button
+      class="btn"
+      type="submit"
+      [disabled]="!name || !email || password.length < 8">
+      Create account
+    </button>
+
+    @if (error) {
+      <p class="error">{{ error }}</p>
+    }
+
+    <small>
+      Already have an account?
+      <a routerLink="/login">Sign in</a>
+    </small>
+  </form>
+</div>

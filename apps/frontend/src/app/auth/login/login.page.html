@@ -1,0 +1,13 @@
+<div class="card">
+  <h2>Welcome back</h2>
+  <form (ngSubmit)="submit()" class="stack">
+    <input class="input" name="email" type="email" [(ngModel)]="email" placeholder="Email" required>
+    <input class="input" name="password" type="password" [(ngModel)]="password" placeholder="Password" required>
+    <button class="btn" type="submit" [disabled]="!email || !password">Sign in</button>
+
+    @if (error) {
+      <p class="error">{{ error }}</p>
+    }
+    <small>New here? <a routerLink="/register">Create an account</a></small>
+  </form>
+</div>
