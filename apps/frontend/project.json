@@ -1,0 +1,35 @@
+{
+  "name": "frontend",
+  "sourceRoot": "apps/frontend/src",
+  "targets": {
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "buildTarget": "frontend:build",
+        "proxyConfig": "apps/frontend/proxy.conf.json"
+      }
+    },
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "options": {
+        "outputPath": "dist/apps/frontend",
+        "index": "apps/frontend/src/index.html",
+        "main": "apps/frontend/src/main.ts",
+        "polyfills": [],
+        "tsConfig": "apps/frontend/tsconfig.app.json",
+        "assets": [
+          "apps/frontend/src/favicon.ico",
+          "apps/frontend/src/assets"
+        ],
+        "styles": ["apps/frontend/src/styles.scss"]
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "jest --runInBand",
+        "cwd": "apps/frontend"
+      }
+    }
+  }
+}

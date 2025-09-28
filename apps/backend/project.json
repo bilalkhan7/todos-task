@@ -1,0 +1,26 @@
+{
+  "name": "backend",
+  "sourceRoot": "apps/backend/src",
+  "targets": {
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "ts-node-dev --respawn --transpile-only --project apps/backend/tsconfig.json apps/backend/src/index.ts"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc -p apps/backend/tsconfig.json && npx prisma generate --schema=prisma/schema.prisma",
+        "cwd": "apps/backend"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "jest --runInBand",
+        "cwd": "apps/backend"
+      }
+    }
+  }
+}

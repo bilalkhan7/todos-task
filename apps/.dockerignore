@@ -1,0 +1,24 @@
+# Node
+node_modules
+npm-debug.log
+yarn.lock
+.pnpm-store
+
+# VCS
+.git
+.gitignore
+
+# Build outputs
+dist
+tmp
+.out
+coverage
+
+# Local env
+.env
+.env.*
+!.env.example
+
+# OS junk
+.DS_Store
+Thumbs.db
