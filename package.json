@@ -13,7 +13,7 @@
     "build": "nx run-many -t build --all",
     "test": "jest --passWithNoTests",
     "test:backend": "jest --config apps/backend/jest.config.ts",
-    "test:frontend": "jest --config apps/frontend/jest.config.ts"
+    "test:frontend": "jest --config apps/frontend/jest.config.js"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^20.3.3",
