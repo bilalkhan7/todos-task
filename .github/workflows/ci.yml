@@ -23,13 +23,14 @@ jobs:
           --health-retries=10
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
-     
-      - name: Install root deps
-        run: npm install
+
+      - name: Install root deps (legacy peer deps)
+        run: npm ci --legacy-peer-deps
 
       - name: Backend Prisma setup
         working-directory: apps/backend
@@ -39,7 +40,7 @@ jobs:
           SESSION_SECRET: test-secret
         run: |
           cp .env.example .env
-          npm install
+          npm ci --legacy-peer-deps
           npm run prisma:generate
           npm run prisma:migrate
 
