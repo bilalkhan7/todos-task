@@ -75,12 +75,8 @@ jobs:
       - name: Install root deps (respect peer deps)
         run: npm ci --legacy-peer-deps
 
-      - name: Install frontend deps (workspace)
-        working-directory: apps/frontend
-        run: npm ci --legacy-peer-deps
-
       - name: Run frontend tests (Jest)
         working-directory: apps/frontend
         env:
           TZ: UTC
-        run: npx jest --config jest.config.js --runInBand
+        run: npx jest --config jest.config.js 
