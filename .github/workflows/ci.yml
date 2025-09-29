@@ -53,7 +53,6 @@ jobs:
       - name: Run backend tests (Jest)
         working-directory: apps/backend
         env:
-          # match what you use locally for tests
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/testapp?schema=public
           CORS_ORIGIN: http://localhost:4200
           SESSION_SECRET: test-secret
@@ -84,4 +83,4 @@ jobs:
         working-directory: apps/frontend
         env:
           TZ: UTC
-        run: npx jest --config jest.config.ts --runInBand
+        run: npx jest --config jest.config.js --runInBand
