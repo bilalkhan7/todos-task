@@ -36,16 +36,16 @@ export function createApp() {
     session({
       store: new PgStore({
         pool: pgPool,
-        tableName: 'user_sessions', 
-        createTableIfMissing: true, 
+        tableName: 'user_sessions',
+        createTableIfMissing: true,
       }),
       secret: env.sessionSecret,
       resave: false,
       saveUninitialized: false,
       cookie: {
         httpOnly: true,
-        sameSite: 'lax',                
-        secure: false,                 
+        sameSite: 'lax',
+        secure: false,
         maxAge: 1000 * 60 * 60 * 24,
       },
       name: 'sid',
@@ -81,8 +81,7 @@ export function createApp() {
     const parsed = RegisterSchema.safeParse(req.body);
     if (!parsed.success) return res.status(400).json({ errors: parsed.error.flatten() });
 
-    const email = parsed.data.email.toLowerCase(); 
-
+    const email = parsed.data.email.toLowerCase();
     const existing = await prisma.user.findUnique({ where: { email } });
     if (existing) return res.status(409).json({ message: 'Email already registered' });
 
@@ -109,7 +108,7 @@ export function createApp() {
   );
 
   app.post('/api/auth/logout', csrfProtection, (req, res) => {
-    req.logout(err => {
+    req.logout((err) => {
       if (err) return res.status(500).json({ message: 'Logout error' });
       req.session.destroy(() => res.status(204).end());
     });
@@ -148,7 +147,7 @@ export function createApp() {
     res.status(201).json(created);
   });
 
-  app.patch('/api/todos/:id', requireAuth, csrfProtection, async (req, res) => {
+  const updateTodo = async (req: Request, res: Response) => {
     const userId = (req.user as any).id as string;
     const parsed = TodoUpdateSchema.safeParse(req.body);
     if (!parsed.success) return res.status(400).json({ errors: parsed.error.flatten() });
@@ -161,7 +160,9 @@ export function createApp() {
       data: parsed.data,
     });
     res.json(updated);
-  });
+  };
+
+  app.patch('/api/todos/:id', requireAuth, csrfProtection, updateTodo);
 
   app.delete('/api/todos/:id', requireAuth, csrfProtection, async (req, res) => {
     const userId = (req.user as any).id as string;
